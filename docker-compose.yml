@@ -34,7 +34,7 @@ services:
     volumes:
       - frontend_modules:/app/node_modules
     environment:
-      - NODE_ENV=development
+      # - NODE_ENV=development
       - LOG_LEVEL=info
     depends_on:
       - document-db
