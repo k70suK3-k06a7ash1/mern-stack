@@ -1,7 +1,7 @@
 services:
-  document-db:
+  document_db:
     image: mongo:latest
-    container_name: document-db
+    container_name: document_db
     restart: always
     ports:
       - "27017:27017"
@@ -34,10 +34,9 @@ services:
     volumes:
       - frontend_modules:/app/node_modules
     environment:
-      # - NODE_ENV=development
       - LOG_LEVEL=info
     depends_on:
-      - document-db
+      - document_db
     networks:
       - app_network
 
