@@ -39,6 +39,23 @@ services:
       - document_db
     networks:
       - app_network
+      
+  mongodb_compass:
+    image: mongo-express
+    container_name: mongodb_compass
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@document_db:27017/
+    depends_on:
+      - document_db
+    networks:
+      - app_network
 
 volumes:
   mongodb_data:

@@ -13,15 +13,18 @@ interface Todo {
 
 export const loader: LoaderFunction = async () => {
 	const db = await connectToMongoDB();
-	if (db) {
-		console.log("Successfully connected to MongoDB!");
+	if (!db) {
+		throw new Error("Could not connect to MongoDB");
 	}
-	return null;
+	const collection = db.collection("todos");
+	const todos = await collection.find().toArray();
+
+	return todos;
 };
 
 export default function Home() {
 	const result = useLoaderData();
-	console.log(result);
+	console.log({ result });
 
 	const [todos, setTodos] = useState<Todo[]>([
 		{ id: 1, text: "Learn React Router", completed: true },
