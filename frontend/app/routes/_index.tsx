@@ -1,5 +1,5 @@
 import { useState } from "react";
-import connectToMongoDB from "../../server";
+import connectToMongoDB from "../db.server";
 import { TodoList } from "../components/TodoList";
 import { TodoForm } from "../components/TodoForm";
 import { useLoaderData } from "react-router";
