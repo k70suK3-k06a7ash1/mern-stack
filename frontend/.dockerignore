@@ -1,6 +1,4 @@
-node_modules
-.git
-.DS_Store
+.react-router
 build
-dist
-.env
+node_modules
+README.md
