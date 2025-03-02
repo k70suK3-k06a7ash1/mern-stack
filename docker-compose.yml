@@ -35,6 +35,10 @@ services:
       - mongodb
     networks:
       - app_network
+    dns:
+      - 8.8.8.8
+    env_file:
+      - .env
 
 volumes:
   mongodb_data:

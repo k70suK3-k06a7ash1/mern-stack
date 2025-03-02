@@ -1,20 +1,23 @@
-FROM oven/bun:latest AS development-dependencies-env
+FROM oven/bun:1 AS dependencies-env
 COPY . /app
-WORKDIR /app
-RUN bun install --frozen-lockfile
 
-FROM oven/bun:latest AS production-dependencies-env
+FROM dependencies-env AS development-dependencies-env
 COPY ./package.json bun.lock /app/
 WORKDIR /app
-RUN bun install --omit=dev
+RUN bun i
 
-FROM oven/bun:latest AS build-env
-COPY . /app/
+FROM dependencies-env AS production-dependencies-env
+COPY ./package.json bun.lock /app/
+WORKDIR /app
+RUN bun i --production
+
+FROM dependencies-env AS build-env
+COPY ./package.json bun.lock /app/
 COPY --from=development-dependencies-env /app/node_modules /app/node_modules
 WORKDIR /app
 RUN bun run build
 
-FROM oven/bun:latest
+FROM dependencies-env
 COPY ./package.json bun.lock /app/
 COPY --from=production-dependencies-env /app/node_modules /app/node_modules
 COPY --from=build-env /app/build /app/build
