@@ -1,7 +1,8 @@
 import { MongoClient } from "mongodb";
 
 async function connectToMongoDB() {
-	const uri = "mongodb://root:example@document_db:27017/test";
+	const uri =
+		"mongodb://root:example@document_db:27017/database?authSource=admin";
 	// const uri = "mongodb://root:example@localhost:27017/test";
 
 	const client = new MongoClient(uri);
