@@ -1,4 +1,3 @@
-import type React from "react";
 import { TodoItem } from "./TodoItem";
 
 interface Todo {
@@ -13,11 +12,7 @@ interface TodoListProps {
 	deleteTodo: (id: number) => void;
 }
 
-export const TodoList: React.FC<TodoListProps> = ({
-	todos,
-	toggleTodo,
-	deleteTodo,
-}) => {
+export const TodoList = ({ todos, toggleTodo, deleteTodo }: TodoListProps) => {
 	return (
 		<ul>
 			{todos.map((todo) => (

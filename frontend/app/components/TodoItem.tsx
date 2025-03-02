@@ -1,5 +1,3 @@
-import type React from "react";
-
 interface TodoItemProps {
 	todo: {
 		id: number;
@@ -10,11 +8,7 @@ interface TodoItemProps {
 	deleteTodo: (id: number) => void;
 }
 
-export const TodoItem: React.FC<TodoItemProps> = ({
-	todo,
-	toggleTodo,
-	deleteTodo,
-}) => {
+export const TodoItem = ({ todo, toggleTodo, deleteTodo }: TodoItemProps) => {
 	return (
 		<li>
 			<label>
