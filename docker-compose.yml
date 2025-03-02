@@ -19,7 +19,6 @@ services:
       - .env
 
   frontend:
-    working_dir: /app
     logging:
       driver: json-file
       options:
