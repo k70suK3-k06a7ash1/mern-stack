@@ -4,7 +4,7 @@ interface TodoFormProps {
 	addTodo: (text: string) => void;
 }
 
-export const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
+export const TodoForm = ({ addTodo }: TodoFormProps) => {
 	const [text, setText] = useState("");
 
 	const handleSubmit = (e: React.FormEvent) => {
