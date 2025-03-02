@@ -14,6 +14,10 @@ services:
       - mongodb_data:/data/db
     networks:
       - app_network
+    dns:
+      - 8.8.8.8
+    env_file:
+      - .env
 
   frontend:
     image: oven/bun:latest
