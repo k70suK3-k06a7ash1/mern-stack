@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import connectToMongoDB from "../../server";
 import { TodoList } from "../components/TodoList";
 import { TodoForm } from "../components/TodoForm";
 
@@ -34,6 +35,16 @@ export default function Home() {
 	const deleteTodo = (id: number) => {
 		setTodos(todos.filter((todo) => todo.id !== id));
 	};
+
+	useEffect(() => {
+		async function fetchData() {
+			const db = await connectToMongoDB();
+			if (db) {
+				console.log("Successfully connected to MongoDB!");
+			}
+		}
+		fetchData();
+	}, []);
 
 	return (
 		<div className="container mx-auto mt-4">
