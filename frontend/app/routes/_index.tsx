@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import connectToMongoDB from "../../server";
 import { TodoList } from "../components/TodoList";
 import { TodoForm } from "../components/TodoForm";
+import { useLoaderData } from "react-router";
+import type { LoaderFunction } from "react-router";
 
 interface Todo {
 	id: number;
@@ -9,7 +11,16 @@ interface Todo {
 	completed: boolean;
 }
 
+export const loader: LoaderFunction = async () => {
+	const db = await connectToMongoDB();
+	if (db) {
+		console.log("Successfully connected to MongoDB!");
+	}
+	return null;
+};
+
 export default function Home() {
+	useLoaderData();
 	const [todos, setTodos] = useState<Todo[]>([
 		{ id: 1, text: "Learn React Router", completed: true },
 		{ id: 2, text: "Build a Todo App", completed: false },
@@ -35,16 +46,6 @@ export default function Home() {
 	const deleteTodo = (id: number) => {
 		setTodos(todos.filter((todo) => todo.id !== id));
 	};
-
-	useEffect(() => {
-		async function fetchData() {
-			const db = await connectToMongoDB();
-			if (db) {
-				console.log("Successfully connected to MongoDB!");
-			}
-		}
-		fetchData();
-	}, []);
 
 	return (
 		<div className="container mx-auto mt-4">
