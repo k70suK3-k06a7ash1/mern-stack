@@ -20,7 +20,9 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Home() {
-	useLoaderData();
+	const result = useLoaderData();
+	console.log(result);
+
 	const [todos, setTodos] = useState<Todo[]>([
 		{ id: 1, text: "Learn React Router", completed: true },
 		{ id: 2, text: "Build a Todo App", completed: false },
